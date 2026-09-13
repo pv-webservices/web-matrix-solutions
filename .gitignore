@@ -1,0 +1,9 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+.DS_Store
+scripts/asset-downloads.json
+*.tsbuildinfo
+qa/*.png
+qa/*report.json

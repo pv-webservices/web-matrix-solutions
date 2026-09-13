@@ -1,0 +1,15 @@
+import {chromium} from '@playwright/test';
+import fs from 'node:fs/promises';
+const browser=await chromium.launch({headless:true});
+const page=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:'no-preference'});
+const errors=[];page.on('pageerror',e=>errors.push(e.message));
+await page.goto('http://127.0.0.1:5173/',{waitUntil:'networkidle'});
+await page.waitForTimeout(1800);
+await page.screenshot({path:'qa/desktop-motion.png'});
+await page.evaluate(async()=>{for(let y=0;y<document.documentElement.scrollHeight;y+=600){window.scrollTo(0,y);await new Promise(r=>setTimeout(r,850))}window.scrollTo(0,0)});
+await page.waitForTimeout(1000);
+const report=await page.evaluate(()=>({stats:[...document.querySelectorAll('[data-count]')].map(e=>e.textContent),hiddenReveals:[...document.querySelectorAll('.reveal')].filter(e=>Number(getComputedStyle(e).opacity)<.99).length,overflow:document.documentElement.scrollWidth>innerWidth}));
+await page.screenshot({path:'qa/desktop-motion-full.png',fullPage:true});
+await fs.writeFile('qa/motion-report.json',JSON.stringify({...report,errors},null,2));
+if(report.hiddenReveals||report.overflow||errors.length)throw new Error(JSON.stringify({...report,errors}));
+console.log(JSON.stringify({...report,errors}));await browser.close();

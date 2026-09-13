@@ -1,0 +1,65 @@
+[
+  {
+    "name": "hero-environment",
+    "creation": "XmHMDlVBfo",
+    "model": "gpt-2",
+    "resolution": "1k",
+    "credits": 325
+  },
+  {
+    "name": "hero-device",
+    "creation": "lJRrxTFgv9",
+    "model": "gpt-2",
+    "resolution": "1k",
+    "credits": 325
+  },
+  {
+    "name": "process-sphere",
+    "creation": "jU6KkTiLD0",
+    "model": "gpt-2",
+    "resolution": "1k",
+    "credits": 325
+  },
+  {
+    "name": "work-portrait",
+    "creation": "UPALsBBwny",
+    "model": "gpt-2",
+    "resolution": "1k",
+    "credits": 325
+  },
+  {
+    "name": "work-device",
+    "creation": "Lwik1elswO",
+    "model": "gpt-2",
+    "resolution": "1k",
+    "credits": 325
+  },
+  {
+    "name": "work-architecture",
+    "creation": "Sy2jL8kUb8",
+    "model": "gpt-2",
+    "resolution": "1k",
+    "credits": 325
+  },
+  {
+    "name": "work-mobile",
+    "creation": "IfKdX6utvE",
+    "model": "gpt-2",
+    "resolution": "1k",
+    "credits": 325
+  },
+  {
+    "name": "cta-device",
+    "creation": "TdanYUmVNR",
+    "model": "gpt-2",
+    "resolution": "1k",
+    "credits": 325
+  },
+  {
+    "name": "faq-sphere",
+    "creation": "w4Gslaz7EI",
+    "model": "gpt-2",
+    "resolution": "1k",
+    "credits": 325
+  }
+]
