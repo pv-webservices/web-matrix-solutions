@@ -1,39 +1,52 @@
-# Nexora — digital agency website
+# Web Matrix Solutions website
 
-React + TypeScript + Vite implementation of the supplied dark agency reference. All sections are included, with the six requested services in a responsive three-column/two-row grid. GSAP and ScrollTrigger provide restrained entrances, parallax and timeline motion; reduced-motion uses the fully visible static layout.
+A responsive, single-page business website built with React, TypeScript and Vite. The supplied homepage image in `public/` informed the dark visual direction. The site now uses the Web Matrix Solutions brand and the verified contact details provided for this project.
 
 ## Run
 
 ```sh
 npm install
 npm run dev
-npm run build
-npm run preview
 ```
+
+Open `http://127.0.0.1:5173/`.
 
 ## Verify
 
-With the development server running on port 5173:
-
 ```sh
+npm run build
 npm test
-node scripts/visual-qa.mjs
 ```
 
-The browser tests cover services, project dialogs, focus restoration, FAQ, testimonial controls and swipe, mobile navigation, draft download, email preferences, journal and sitemap. The visual QA script captures the requested seven viewport widths plus 320px, verifies image loading, and writes a side-by-side reference comparison in `qa/`.
+The Playwright tests cover every in-page link, hero and navigation redirects, service and concept details, the commitments slideshow, insights, FAQ, the contact form, mobile navigation, and layout plus image loading at seven viewport widths.
 
-## Assets
+## Structure
 
-Nine separate raster assets were generated through Magnific MCP using GPT 2, 1K, high quality. They are served locally as optimized WebP files (about 402 KB total). No video is used. Model and creation provenance is recorded in `public/assets/provenance.json`. Inter variable Latin is self-hosted; its OFL license is included in `public/fonts/`.
+`src/App.tsx` composes the page from `src/components/` (Header, Hero, Services, About, Process, Work, Commitments, CallToAction, Insights, Faq, Contact, Footer). Copy lives in `src/data.ts`; styles are split under `src/styles/` and imported by `src/styles.css`. All scroll motion lives in `src/motion.ts`.
 
-## Before public launch
+Page order follows the supplied homepage reference: hero with stats, technology strip, services, about, process, work, commitments slideshow, call to action, insights, FAQ, contact and footer. Every in-page link is covered by a test that checks its target section exists.
 
-The reference brand name, metrics, projects and testimonials are retained as illustrative reference content. Replace or verify them before public publication. The website uses Nexora to match the supplied reference, despite the workspace folder name.
+## Images and motion
 
-No business contact address, social profiles, booking URL or submission backend was supplied. Contact controls open a validated form that saves a local project draft and supports downloading it. The email field saves a local preference. Both explicitly state that nothing was submitted. Connect those flows to approved endpoints, add verified social and booking links, and replace the preview legal text before public launch.
+The page uses the nine existing 1K WebP images in `public/assets/` (creation metadata in `public/assets/provenance.json`). There are no placeholders and no videos. An attempt to generate extra images with Google Nano Banana 2 through Magnific failed because the connected Magnific account had no usable credit wallet; the layout does not depend on them.
 
-Deploy the `dist/` directory to a static host after running `npm run build`. Nothing has been deployed by this implementation.
+Motion uses GSAP ScrollTrigger:
 
-## Visual refinements
+- Hero: staggered entrance, floating laptop, cycling words on the screen, background zoom and parallax on scroll, animated counters and a rotating scroll badge.
+- About: words light up as you scroll, next to sticky stacked principle cards.
+- Process: pinned on desktop; the timeline fills and steps activate as you scroll while the sphere rotates. On phones it becomes a vertical timeline.
+- Work: a pinned horizontal slideshow on desktop with image parallax. On touch screens it is a swipeable rail.
+- Commitments: an auto-advancing slideshow with arrows, dots, keyboard and swipe. It pauses on hover, focus or touch.
+- Call to action: zoom reveal. Insights images zoom as they enter.
+- Cards tilt and follow the cursor with a spotlight on hover. On touch they lift and glow when pressed.
+- Buttons use flowing color-changing gradients (no shine sweep).
 
-The technology strip uses locally hosted monochrome SVG logos from Simple Icons, with a seamless marquee and pause/resume control. Reduced-motion keeps the list static and horizontally scrollable. Desktop section padding is 80px (65px tablet, 55px mobile); the hero heading uses staggered letter reveals and a single gradient sweep.
+Pinned scenes only run on screens at least 900 px wide and 680 px tall. People who prefer reduced motion get a static layout.
+
+Visual QA with motion enabled: `node scripts/scroll-qa.mjs 1440 900` (or any width and height) saves scene screenshots to `qa/scroll/`.
+
+## Contact behavior
+
+The contact form prepares an email to `info@webmatrixsolutions.com` in the visitor's email app. The visitor must review and send it there. Direct email and telephone links are also available. No submission service or customer database is involved.
+
+The work gallery is explicitly identified as creative concepts. It does not claim those visuals are published client projects or attach unverified results to them.

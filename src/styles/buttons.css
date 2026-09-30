@@ -1,0 +1,50 @@
+/*
+ * Buttons: color-changing gradients, no shine sweep.
+ * - Idle: ghost buttons have a slowly flowing violet → magenta → coral border.
+ * - Hover/focus/touch: a flowing multi-color gradient fills the button.
+ */
+@keyframes btn-flow { from { background-position: 0% 50%; } to { background-position: -200% 50%; } }
+@keyframes btn-border-flow { from { background-position: 0 0, 0% 50%; } to { background-position: 0 0, -200% 50%; } }
+@keyframes btn-glow { 0%, 100% { box-shadow: 0 10px 30px -10px #a66bec99; } 50% { box-shadow: 0 10px 34px -8px #ff8f7a99; } }
+
+.btn {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: space-between; gap: 16px;
+  min-height: 48px; padding: 6px 6px 6px 22px;
+  border: 1px solid transparent; border-radius: 999px;
+  font-size: 14px; font-weight: 650; white-space: nowrap; letter-spacing: -.01em;
+  transition: color .45s, transform .4s var(--ease-out);
+}
+.btn::before {
+  content: ''; position: absolute; inset: -1px; z-index: -1; border-radius: inherit;
+  background: linear-gradient(100deg, #8e55df, #d54caa, #f1876d, #7d6cf2, #8e55df);
+  background-size: 200% 100%;
+  opacity: 0; transition: opacity .5s;
+  animation: btn-flow 3.2s linear infinite; animation-play-state: paused;
+}
+.btn-icon {
+  width: 36px; height: 36px; flex: none; display: grid; place-items: center; border-radius: 50%;
+  transition: transform .45s var(--ease-out), background-color .45s, color .45s;
+}
+.btn:hover, .btn:focus-visible, .btn:active { transform: translateY(-2px); color: #fff; animation: btn-glow 2.4s ease-in-out infinite; }
+.btn:hover::before, .btn:focus-visible::before, .btn:active::before { opacity: 1; animation-play-state: running; }
+.btn:hover .btn-icon, .btn:focus-visible .btn-icon { transform: rotate(45deg); background: #ffffff2e; color: #fff; }
+.btn:active { transform: scale(.97); }
+
+.btn-primary { background: #f7f4f6; color: #131017; }
+.btn-primary .btn-icon { background: #131017; color: #fff; }
+
+.btn-ghost {
+  color: #f6f3f8;
+  background:
+    linear-gradient(#0c0b10, #0c0b10) padding-box,
+    linear-gradient(100deg, #a66bec, #ec62bd, #ff9671, #7d6cf2, #a66bec) border-box;
+  background-size: 100% 100%, 200% 100%;
+  animation: btn-border-flow 5s linear infinite;
+}
+.btn-ghost .btn-icon { background: #ffffff14; }
+
+@media (max-width: 430px) {
+  .btn { min-height: 46px; padding-left: 18px; gap: 12px; font-size: 13px; }
+  .btn-icon { width: 34px; height: 34px; }
+}

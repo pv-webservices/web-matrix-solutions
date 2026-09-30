@@ -7,3 +7,4 @@ scripts/asset-downloads.json
 *.tsbuildinfo
 qa/*.png
 qa/*report.json
+qa/scroll/
