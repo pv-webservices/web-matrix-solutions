@@ -11,7 +11,7 @@ export default function TechnologyBar() {
   const [paused, setPaused] = useState(false);
   return <section className="container technology-section reveal" aria-label="Technologies we use">
     <div className="technology-heading">
-      <p className="eyebrow">TECHNOLOGIES WE USE</p>
+      <p className="eyebrow"><span aria-hidden="true"/>TECHNOLOGIES WE BUILD WITH</p>
       <button className="technology-pause circle-button" aria-label={paused ? 'Resume technology bar' : 'Pause technology bar'} aria-pressed={paused} onClick={() => setPaused(!paused)}>
         {paused ? <Play size={13}/> : <Pause size={13}/>}
       </button>
