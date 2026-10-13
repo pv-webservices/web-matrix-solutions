@@ -1,56 +1,39 @@
-import { useEffect, useRef, type ReactNode } from 'react';
-import { ArrowUpRight, X } from 'lucide-react';
+import type { ReactNode } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 
-export const image = (name: string) => `/assets/${name}.webp`;
+export const LOGO_MARK = '/brand/wms-mark.png';
+export const LOGO_FULL = '/brand/wms-logo.png';
 
-export function Brand() {
-  return <a className="brand" href="#home" aria-label="Web Matrix Solutions home">
-    <span className="brand-symbol" aria-hidden="true"><i/><i/><i/><i/></span>
-    <span>web<span className="brand-accent">matrix</span><small>SOLUTIONS</small></span>
+export function Brand({ full = false }: { full?: boolean }) {
+  return <a className={`brand ${full ? 'brand-full' : ''}`} href="#home" aria-label="Web Matrix Solutions home">
+    <img src={full ? LOGO_FULL : LOGO_MARK} alt="WMS, Web Matrix Solutions" width={full ? 640 : 480} height={full ? 297 : 163}/>
   </a>;
 }
 
-type ActionProps = {
+interface ActionProps {
   children: ReactNode;
   href: string;
   variant?: 'primary' | 'ghost';
   icon?: ReactNode;
   className?: string;
   onClick?: () => void;
-};
+}
 
+/** Pill link with a rolling label and a magnetic pull (see lib/interactions). */
 export function Action({ children, href, variant = 'ghost', icon, className = '', onClick }: ActionProps) {
-  return <a className={`btn btn-${variant} ${className}`} href={href} onClick={onClick}>
-    <span className="btn-label">{children}</span>
+  return <a className={`btn btn-${variant} ${className}`} href={href} onClick={onClick} data-magnetic>
+    <span className="btn-label"><span>{children}</span><span aria-hidden="true">{children}</span></span>
     <span className="btn-icon" aria-hidden="true">{icon ?? <ArrowUpRight size={16}/>}</span>
   </a>;
 }
 
 export function Eyebrow({ children }: { children: ReactNode }) {
-  return <p className="eyebrow"><span aria-hidden="true"/>{children}</p>;
+  return <p className="eyebrow"><span aria-hidden="true">[</span>{children}<span aria-hidden="true">]</span></p>;
 }
 
-export function SectionIntro({ eyebrow, title, description, action }: { eyebrow: string; title: ReactNode; description?: string; action?: ReactNode }) {
-  return <div className="section-intro">
-    <div className="reveal"><Eyebrow>{eyebrow}</Eyebrow><h2>{title}</h2></div>
-    {(description || action) && <div className="section-intro-aside reveal">{description && <p>{description}</p>}{action}</div>}
-  </div>;
-}
-
-export type Detail = { eyebrow: string; title: string; body: ReactNode } | null;
-
-export function DetailDialog({ detail, close }: { detail: Detail; close: () => void }) {
-  const ref = useRef<HTMLDialogElement>(null);
-  useEffect(() => {
-    if (!detail) return;
-    const dialog = ref.current;
-    dialog?.showModal();
-    return () => dialog?.close();
-  }, [detail]);
-  return <dialog ref={ref} className="detail-dialog" onCancel={close} onClick={event => { if (event.target === event.currentTarget) close(); }}>
-    <div className="detail-inner">
-      <button className="round-control dialog-close" aria-label="Close details" onClick={close}><X size={20}/></button>
-      {detail && <><Eyebrow>{detail.eyebrow}</Eyebrow><h2>{detail.title}</h2>{detail.body}</>}
-    </div>
-  </dialog>;
+/** Heading lines that rise out of a mask when scrolled into view. */
+export function Lines({ lines, as: Tag = 'h2', className = '', id }: { lines: ReactNode[]; as?: 'h1' | 'h2' | 'h3'; className?: string; id?: string }) {
+  return <Tag className={`split ${className}`} id={id}>
+    {lines.map((line, index) => <span className="line" key={index}><span className="line-inner">{line}</span>{' '}</span>)}
+  </Tag>;
 }

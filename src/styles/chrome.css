@@ -1,0 +1,54 @@
+/* Buttons: the label rolls up on hover; lib/interactions adds a magnetic pull. */
+.btn {
+  display: inline-flex; align-items: center; gap: 14px; min-height: 50px; padding: 5px 5px 5px 22px;
+  border-radius: 999px; font-size: 14px; font-weight: 600; letter-spacing: -.01em; white-space: nowrap;
+  transition: background-color .4s, color .4s, border-color .4s, box-shadow .5s;
+}
+.btn-label { display: grid; overflow: hidden; line-height: 1.25; }
+.btn-label > span { grid-area: 1 / 1; transition: transform .6s var(--ease); }
+.btn-label > span + span { transform: translateY(105%); }
+.btn:hover .btn-label > span:first-child, .btn:focus-visible .btn-label > span:first-child { transform: translateY(-105%); }
+.btn:hover .btn-label > span + span, .btn:focus-visible .btn-label > span + span { transform: none; }
+.btn-icon { width: 40px; height: 40px; flex: none; display: grid; place-items: center; border-radius: 50%; transition: transform .6s var(--ease), background-color .4s; }
+.btn:hover .btn-icon { transform: rotate(45deg); }
+.btn-primary { background: #fff; color: #050505; }
+.btn-primary .btn-icon { background: #050505; color: #fff; }
+.btn-primary:hover { box-shadow: 0 10px 40px -8px #ff5b14aa; }
+.btn-primary:hover .btn-icon { background: var(--accent); }
+.btn-ghost { color: #fff; border: 1px solid var(--line-strong); background: #ffffff08; backdrop-filter: blur(10px); }
+.btn-ghost .btn-icon { background: #ffffff14; }
+.btn-ghost:hover { border-color: #ffffff80; background: #ffffff14; }
+
+/* Brand */
+.brand { display: inline-flex; align-items: center; flex: none; }
+.brand img { width: auto; height: 26px; }
+.brand-full img { height: auto; width: 190px; }
+
+/* Floating pill header */
+.site-header { position: fixed; top: 14px; left: 0; right: 0; z-index: 60; display: flex; justify-content: center; pointer-events: none; }
+.header-bar {
+  width: min(100% - 32px, 1000px); display: flex; align-items: center; gap: 20px;
+  padding: 7px 7px 7px 20px; border-radius: 999px; pointer-events: auto;
+  background: #0b0b0b70; border: 1px solid var(--line); backdrop-filter: blur(18px) saturate(150%);
+  transition: background-color .4s;
+}
+.is-scrolled .header-bar { background: #0b0b0bed; }
+.desktop-nav { flex: 1; display: flex; justify-content: center; gap: clamp(16px, 2.6vw, 34px); }
+.desktop-nav a { position: relative; font-size: 14px; color: var(--muted); transition: color .3s; }
+.desktop-nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px; background: currentColor; transform: scaleX(0); transition: transform .5s var(--ease); }
+.desktop-nav a:hover { color: #fff; }
+.desktop-nav a:hover::after { transform: scaleX(1); }
+.header-action { min-height: 42px; padding-left: 18px; font-size: 13px; }
+.header-action .btn-icon { width: 32px; height: 32px; }
+.menu-toggle { display: none; width: 42px; height: 42px; place-items: center; border-radius: 50%; background: #ffffff10; margin-left: auto; }
+
+.mobile-nav { position: fixed; inset: 0; z-index: 55; display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 100px 24px 40px; background: #050505f2; backdrop-filter: blur(20px); }
+.mobile-nav a { display: flex; align-items: center; justify-content: space-between; padding: 14px 4px; border-bottom: 1px solid var(--line); font-size: clamp(1.8rem, 8vw, 2.6rem); font-weight: 600; letter-spacing: -.04em; animation: nav-in .7s var(--ease) both; animation-delay: calc(var(--i) * 50ms); }
+.mobile-nav small { display: block; font: 500 11px ui-monospace, monospace; letter-spacing: .14em; color: var(--accent); }
+.mobile-nav .mobile-call { font-size: 1.2rem; border: 0; }
+@keyframes nav-in { from { opacity: 0; transform: translateY(24px); } }
+
+@media (max-width: 860px) {
+  .desktop-nav, .header-action { display: none; }
+  .menu-toggle { display: grid; }
+}

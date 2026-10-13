@@ -1,6 +1,7 @@
+@import '@fontsource/instrument-serif/400.css';
+@import '@fontsource/instrument-serif/400-italic.css';
+@import 'lenis/dist/lenis.css';
 @import './styles/base.css';
-@import './styles/buttons.css';
-@import './styles/header-hero.css';
+@import './styles/chrome.css';
+@import './styles/hero.css';
 @import './styles/sections.css';
-@import './styles/showcase.css';
-@import './styles/support.css';

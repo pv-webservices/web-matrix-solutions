@@ -1,6 +1,8 @@
 # Web Matrix Solutions website
 
-A responsive, single-page business website built with React, TypeScript and Vite. The supplied homepage image in `public/` informed the dark visual direction. The site now uses the Web Matrix Solutions brand and the verified contact details provided for this project.
+A single-page, motion-rich agency website built with React, TypeScript, Vite, GSAP, Lenis and three.js. The design draws on three references: visuvate.com (floating nav, WebGL works globe, tilted screenshot wall, approach bento), marcuslorenzet.com (giant type with inline image chips, word-by-word text fill, pinned statement with sweeping cards, floating-image CTA) and studiors.be (serif-italic pairing, pinned "Method" steps, light/dark section flips, giant footer wordmark).
+
+The site presents four services only, with no prices: Website Development & Management, Social Media Management, Content Creation and Google My Business Management.
 
 ## Run
 
@@ -16,37 +18,36 @@ Open `http://127.0.0.1:5173/`.
 ```sh
 npm run build
 npm test
+node scripts/scroll-qa.mjs 1440 900   # needs the dev server; saves scene screenshots to qa/scroll/
+node scripts/qa-sheet.mjs 1440        # tiles them into qa/sheet-1440.jpg
 ```
 
-The Playwright tests cover every in-page link, hero and navigation redirects, service and concept details, the commitments slideshow, insights, FAQ, the contact form, mobile navigation, and layout plus image loading at seven viewport widths.
+Tests run with reduced motion by default (static layout) plus one motion test that checks the preloader, both WebGL scenes and the globe's outro.
 
 ## Structure
 
-`src/App.tsx` composes the page from `src/components/` (Header, Hero, Services, About, Process, Work, Commitments, CallToAction, Insights, Faq, Contact, Footer). Copy lives in `src/data.ts`; styles are split under `src/styles/` and imported by `src/styles.css`. All scroll motion lives in `src/motion.ts`.
+- `src/App.tsx` composes the page: Hero, Showcase, Statement, Services, Marquee, Works, Approach, Method, WhyUs, Faq, Cta, Contact, Footer (`src/sections/`).
+- `src/data.ts` holds all copy.
+- `src/lib/motion.ts` sets up Lenis smooth scroll and every GSAP ScrollTrigger scene. `src/lib/interactions.ts` adds the cursor ring, magnetic buttons and card tilt (mouse only).
+- `src/webgl/` contains the hero aurora (plain WebGL, loads with the page) and the works globe (three.js, lazy-loaded when the section mounts). Shaders live in `shaders.ts`.
+- Styles are in `src/styles/`.
 
-Page order follows the supplied homepage reference: hero with stats, technology strip, services, about, process, work, commitments slideshow, call to action, insights, FAQ, contact and footer. Every in-page link is covered by a test that checks its target section exists.
+Pinned scenes use CSS `position: sticky` with scroll progress from ScrollTrigger, so they work at every screen size. With reduced motion, the preloader is skipped and pinned scenes become ordinary sections. If WebGL is unavailable, the hero shows a CSS gradient and the works section shows an image grid.
 
-## Images and motion
+## Brand
 
-The page uses the nine existing 1K WebP images in `public/assets/` (creation metadata in `public/assets/provenance.json`). There are no placeholders and no videos. An attempt to generate extra images with Google Nano Banana 2 through Magnific failed because the connected Magnific account had no usable credit wallet; the layout does not depend on them.
+- Logo: `public/brand/` holds transparent PNGs cut from the supplied `public/WMS logo.jfif` by `node scripts/make-logo.mjs` (white mark for the header, full logo with tagline for the footer, a dark mark, and favicons).
+- Palette: black, white and one orange family. `--accent` #FF5B14, `--accent-light` #FF9A52, `--accent-deep` #E8400B, and `--grad` from deep ember to amber (`src/styles/base.css`). The WebGL shaders use the same oranges.
+- Preloader: the WMS mark is wiped in behind an orange light sweep, the tagline "We build. You grow." rises, then the black screen breaks into tiles that flash orange and collapse from the centre to reveal the hero (`preloader()` in `src/lib/motion.ts`).
 
-Motion uses GSAP ScrollTrigger:
+## Images
 
-- Hero: staggered entrance, floating laptop, cycling words on the screen, background zoom and parallax on scroll, animated counters and a rotating scroll badge.
-- About: words light up as you scroll, next to sticky stacked principle cards.
-- Process: pinned on desktop; the timeline fills and steps activate as you scroll while the sphere rotates. On phones it becomes a vertical timeline.
-- Work: a pinned horizontal slideshow on desktop with image parallax. On touch screens it is a swipeable rail.
-- Commitments: an auto-advancing slideshow with arrows, dots, keyboard and swipe. It pauses on hover, focus or touch.
-- Call to action: zoom reveal. Insights images zoom as they enter.
-- Cards tilt and follow the cursor with a spotlight on hover. On touch they lift and glow when pressed.
-- Buttons use flowing color-changing gradients (no shine sweep).
+`public/assets/gen/` holds 18 images generated with OpenAI `gpt-image-2` by `scripts/generate-images.mjs` (prompts in `scripts/image-prompts.mjs`, record in `public/assets/gen/provenance.json`): 16 website concepts for fictional brands, a social media phone and a website device scene. The script reads `OPENAI_API_KEY` from `.env` (git-ignored) and only generates images that are missing.
 
-Pinned scenes only run on screens at least 900 px wide and 680 px tall. People who prefer reduced motion get a static layout.
+The works globe and showcase are labelled as concept designs, not client projects. The Google My Business card is an HTML illustration of a fictional listing. Content Creation and two approach cards reuse earlier images from `public/assets/`.
 
-Visual QA with motion enabled: `node scripts/scroll-qa.mjs 1440 900` (or any width and height) saves scene screenshots to `qa/scroll/`.
+`node scripts/recolor-assets.mjs` shifts the blue/violet light in four images into the orange range (`*-orange.webp`) and cuts the black background out of the approach sphere (`approach-orb.webp`). Originals are kept.
 
-## Contact behavior
+## Contact behaviour
 
-The contact form prepares an email to `info@webmatrixsolutions.com` in the visitor's email app. The visitor must review and send it there. Direct email and telephone links are also available. No submission service or customer database is involved.
-
-The work gallery is explicitly identified as creative concepts. It does not claim those visuals are published client projects or attach unverified results to them.
+The contact form opens the visitor's email app with a message to `info@webmatrixsolutions.com` ready to send. Nothing is sent until the visitor presses Send there. Direct email and phone links are also available.

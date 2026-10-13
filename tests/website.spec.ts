@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+const SERVICES = ['Website Development & Management', 'Social Media Management', 'Content Creation', 'Google My Business Management'];
+
 test('every in-page link points to a real section', async ({ page }) => {
   await page.goto('/');
   await expect(page).toHaveTitle(/Web Matrix Solutions/);
@@ -11,64 +13,51 @@ test('every in-page link points to a real section', async ({ page }) => {
   }
 });
 
-test('hero actions and navigation redirect to the right sections', async ({ page }) => {
+test('shows exactly the four services and no prices', async ({ page }) => {
   await page.goto('/');
-  await page.locator('.hero').getByRole('link', { name: 'Start a project' }).click();
-  await expect(page).toHaveURL(/#contact$/);
+  const cards = page.locator('.service-card h3');
+  await expect(cards).toHaveText(SERVICES);
+  const text = await page.locator('body').innerText();
+  expect(text).not.toMatch(/₹|\$\s?\d|\bINR\b|per month|\/mo\b|pricing/i);
+  for (const service of SERVICES) {
+    await expect(page.getByRole('combobox', { name: 'What can we help with?' }).locator('option', { hasText: service })).toHaveCount(1);
+  }
+});
+
+test('hero and navigation lead to the right sections', async ({ page }) => {
   await page.goto('/');
-  await page.locator('.hero').getByRole('link', { name: 'Explore our work' }).click();
-  await expect(page).toHaveURL(/#work$/);
+  await expect(page.getByRole('heading', { level: 1 })).toContainText("Brands people can't scroll past.");
+  await page.locator('.hero').getByRole('link', { name: 'Start your project' }).click();
+  await expect(page.locator('#contact h2')).toBeInViewport();
   await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Process' }).click();
-  await expect(page).toHaveURL(/#process$/);
   await expect(page.locator('#process h2')).toBeInViewport();
+  await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'FAQ' }).click();
+  await expect(page.locator('#faq h2')).toBeInViewport();
 });
 
-test('service details open and lead to contact', async ({ page }) => {
+test('FAQ opens one answer at a time', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('.service-card')).toHaveCount(6);
-  await page.getByRole('button', { name: 'Learn more about Website Development' }).click();
-  await expect(page.getByRole('dialog').getByRole('heading', { name: 'Website Development' })).toBeVisible();
-  await page.getByRole('dialog').getByRole('link', { name: 'Talk about this service' }).click();
-  await expect(page.getByRole('dialog')).not.toBeVisible();
-  await expect(page).toHaveURL(/#contact$/);
+  const first = page.getByRole('button', { name: /How do I get started/ });
+  const second = page.getByRole('button', { name: /manage just one service/ });
+  await expect(first).toHaveAttribute('aria-expanded', 'true');
+  await second.click();
+  await expect(second).toHaveAttribute('aria-expanded', 'true');
+  await expect(first).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.getByText('You can start with one service')).toBeVisible();
 });
 
-test('work concepts, commitments slideshow, insights and FAQ work', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.locator('button.work-card')).toHaveCount(4);
-  await page.getByRole('button', { name: 'Explore The editorial launch concept' }).click();
-  await expect(page.getByRole('dialog').getByText('illustrative concept')).toBeVisible();
-  await page.keyboard.press('Escape');
-  await expect(page.getByRole('dialog')).not.toBeVisible();
-
-  const rail = page.getByRole('region', { name: 'Our commitments' });
-  await page.getByRole('button', { name: 'Next commitment' }).click();
-  await expect.poll(() => rail.evaluate(element => element.scrollLeft)).toBeGreaterThan(0);
-  await page.getByRole('button', { name: 'Show Clarity at every checkpoint' }).click();
-  await expect(page.getByRole('button', { name: 'Show Clarity at every checkpoint' })).toHaveAttribute('aria-pressed', 'true');
-
-  await page.getByRole('button', { name: /Make your website easier to choose/ }).click();
-  await expect(page.getByRole('dialog').getByRole('heading', { name: 'Make your website easier to choose' })).toBeVisible();
-  await page.keyboard.press('Escape');
-
-  const question = page.getByRole('button', { name: /How does a project begin/ });
-  await question.click();
-  await expect(question).toHaveAttribute('aria-expanded', 'true');
-  await expect(page.getByText('We begin with a conversation about your goals')).toBeVisible();
-});
-
-test('contact form prepares a real email and direct contact links work', async ({ page }) => {
+test('contact form prepares an email and direct contact links work', async ({ page }) => {
   await page.goto('/');
   const form = page.locator('.contact-form');
   await form.getByLabel('Your name').fill('Example Person');
   await form.getByLabel('Email address').fill('example@example.com');
-  await form.getByLabel('What can we help with?').selectOption('Shopify Development');
-  await form.getByLabel('Tell us about the project').fill('We need a new storefront.');
+  await form.getByLabel('What can we help with?').selectOption('Google My Business Management');
+  await form.getByLabel('Tell us about your business').fill('We want more calls from Google.');
   await form.getByRole('button', { name: 'Prepare email' }).click();
-  await expect(form.getByRole('status')).toContainText('Your email app should open');
-  await expect(form.getByRole('link', { name: 'Open the prepared email again' })).toHaveAttribute('href', /mailto:info@webmatrixsolutions\.com\?subject=Project%20enquiry%3A%20Shopify%20Development/);
-  await expect(page.getByRole('link', { name: 'info@webmatrixsolutions.com' }).first()).toHaveAttribute('href', 'mailto:info@webmatrixsolutions.com');
-  await expect(page.getByRole('link', { name: '+91 89208 47457' }).first()).toHaveAttribute('href', 'tel:+918920847457');
+  await expect(form.getByRole('status')).toContainText('Your email app should now be open');
+  await expect(form.getByRole('link', { name: 'Open the prepared email again' })).toHaveAttribute('href', /mailto:info@webmatrixsolutions\.com\?subject=Project%20enquiry%3A%20Google%20My%20Business%20Management/);
+  await expect(page.getByRole('link', { name: /info@webmatrixsolutions\.com/ }).first()).toHaveAttribute('href', 'mailto:info@webmatrixsolutions.com');
+  await expect(page.getByRole('link', { name: /\+91 89208 47457/ }).first()).toHaveAttribute('href', 'tel:+918920847457');
 });
 
 test('mobile menu links and escape work', async ({ page }) => {
@@ -80,10 +69,33 @@ test('mobile menu links and escape work', async ({ page }) => {
   await expect(menu).toBeVisible();
   await menu.getByRole('link', { name: 'Services' }).click();
   await expect(menu).not.toBeVisible();
-  await expect(page).toHaveURL(/#services$/);
-  await toggle.click();
+  await expect(page.locator('#services h2')).toBeInViewport();
+  await page.getByRole('button', { name: 'Open navigation' }).click();
   await page.keyboard.press('Escape');
   await expect(menu).not.toBeVisible();
+});
+
+test.describe('with motion', () => {
+  test.use({ reducedMotion: 'no-preference' });
+
+  test('preloader clears, WebGL scenes render and the globe reaches its outro', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveClass(/is-loaded/, { timeout: 6000 });
+    await expect(page.locator('.hero-canvas')).not.toHaveClass(/is-fallback/);
+    await expect(page.locator('#work')).not.toHaveClass(/is-fallback/);
+    await page.evaluate(async () => {
+      const work = document.querySelector<HTMLElement>('#work')!;
+      const end = work.offsetTop + work.offsetHeight - window.innerHeight;
+      for (let y = window.scrollY; y < end; y += 300) { window.scrollTo(0, y); await new Promise(resolve => setTimeout(resolve, 25)); }
+      window.scrollTo(0, end);
+    });
+    await expect(page.locator('#work')).toHaveClass(/is-outro/);
+    await expect(page.locator('.works-outro').getByRole('link', { name: 'Start your project' })).toBeVisible();
+    expect(errors).toEqual([]);
+  });
 });
 
 for (const width of [320, 375, 390, 430, 768, 1024, 1440]) {
@@ -92,17 +104,14 @@ for (const width of [320, 375, 390, 430, 768, 1024, 1440]) {
     await page.goto('/');
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
     await expect(page.locator('.hero h1')).toBeVisible();
-    for (const id of ['#services', '#about', '#process', '#work', '#insights', '#faq', '#contact']) {
+    for (const id of ['#services', '#approach', '#process', '#faq', '#contact']) {
       await expect(page.locator(`${id} h2`).first()).toBeVisible();
     }
     await page.evaluate(async () => {
       for (let y = 0; y < document.documentElement.scrollHeight; y += 700) { window.scrollTo(0, y); await new Promise(resolve => setTimeout(resolve, 30)); }
-      for (const rail of document.querySelectorAll<HTMLElement>('.work-rail, .commitment-rail')) {
-        rail.scrollIntoView();
-        for (let x = 0; x <= rail.scrollWidth; x += 250) { rail.scrollLeft = x; await new Promise(resolve => setTimeout(resolve, 30)); }
-      }
     });
     await page.waitForFunction(() => [...document.images].every(img => img.complete));
-    expect(await page.evaluate(() => [...document.images].filter(img => !img.naturalWidth).length)).toBe(0);
+    const broken = await page.evaluate(() => [...document.images].filter(img => !img.naturalWidth).map(img => img.src));
+    expect(broken).toEqual([]);
   });
 }

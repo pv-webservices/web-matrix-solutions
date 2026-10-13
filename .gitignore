@@ -8,3 +8,6 @@ scripts/asset-downloads.json
 qa/*.png
 qa/*report.json
 qa/scroll/
+.env
+.env.*
+qa/*.jpg
