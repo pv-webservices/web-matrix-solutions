@@ -34,11 +34,19 @@ Tests run with reduced motion by default (static layout) plus one motion test th
 
 Pinned scenes use CSS `position: sticky` with scroll progress from ScrollTrigger, so they work at every screen size. With reduced motion, the preloader is skipped and pinned scenes become ordinary sections. If WebGL is unavailable, the hero shows a CSS gradient and the works section shows an image grid.
 
+## Brand
+
+- Logo: `public/brand/` holds transparent PNGs cut from the supplied `public/WMS logo.jfif` by `node scripts/make-logo.mjs` (white mark for the header, full logo with tagline for the footer, a dark mark, and favicons).
+- Palette: black, white and one orange family. `--accent` #FF5B14, `--accent-light` #FF9A52, `--accent-deep` #E8400B, and `--grad` from deep ember to amber (`src/styles/base.css`). The WebGL shaders use the same oranges.
+- Preloader: the WMS mark is wiped in behind an orange light sweep, the tagline "We build. You grow." rises, then the black screen breaks into tiles that flash orange and collapse from the centre to reveal the hero (`preloader()` in `src/lib/motion.ts`).
+
 ## Images
 
 `public/assets/gen/` holds 18 images generated with OpenAI `gpt-image-2` by `scripts/generate-images.mjs` (prompts in `scripts/image-prompts.mjs`, record in `public/assets/gen/provenance.json`): 16 website concepts for fictional brands, a social media phone and a website device scene. The script reads `OPENAI_API_KEY` from `.env` (git-ignored) and only generates images that are missing.
 
 The works globe and showcase are labelled as concept designs, not client projects. The Google My Business card is an HTML illustration of a fictional listing. Content Creation and two approach cards reuse earlier images from `public/assets/`.
+
+`node scripts/recolor-assets.mjs` shifts the blue/violet light in four images into the orange range (`*-orange.webp`) and cuts the black background out of the approach sphere (`approach-orb.webp`). Originals are kept.
 
 ## Contact behaviour
 

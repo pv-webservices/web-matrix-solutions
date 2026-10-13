@@ -20,7 +20,7 @@ function ConversionMock() {
 function GrowthMock() {
   return <svg className="growth" viewBox="0 0 320 160" aria-hidden="true">
     <defs>
-      <linearGradient id="growth-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#3d7bff" stopOpacity=".45"/><stop offset="1" stopColor="#3d7bff" stopOpacity="0"/></linearGradient>
+      <linearGradient id="growth-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#ff5b14" stopOpacity=".45"/><stop offset="1" stopColor="#ff5b14" stopOpacity="0"/></linearGradient>
     </defs>
     {[40, 80, 120].map(y => <line key={y} x1="0" x2="320" y1={y} y2={y} className="growth-grid"/>)}
     <path className="growth-area" d="M0 140 C40 132 60 120 90 118 S140 96 170 90 S230 54 260 44 S300 22 320 14 L320 160 L0 160Z" fill="url(#growth-fill)"/>

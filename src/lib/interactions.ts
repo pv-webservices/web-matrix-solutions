@@ -26,6 +26,7 @@ function cursor(): Cleanup {
       ringX(event.clientX); ringY(event.clientY);
       const target = event.target instanceof Element ? event.target : null;
       ring.classList.toggle('is-hover', Boolean(target?.closest(HOVER_TARGETS)));
+      ring.classList.toggle('is-light', Boolean(target?.closest('.method')));
       ring.classList.toggle('is-globe', Boolean(target?.closest('.works-sticky')) && !target?.closest('a'));
     }),
     listen(document, 'pointerdown', () => ring.classList.add('is-down')),

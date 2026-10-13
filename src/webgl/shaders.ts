@@ -37,11 +37,11 @@ export const neonWavesFragment = /* glsl */ `
       q.y += sin(fi * 2.3 + t * 0.4) * 0.55;
       glow += wave(q, 1.2 + fi * 0.28, 0.32, t * (0.8 + fi * 0.17) + fi * 1.7);
     }
-    vec3 col = vec3(0.06, 0.28, 1.0) * glow + vec3(0.55, 0.8, 1.0) * glow * glow * 0.012;
+    vec3 col = vec3(1.0, 0.3, 0.05) * glow + vec3(1.0, 0.78, 0.55) * glow * glow * 0.012;
     col = 1.0 - exp(-col * 0.9);
     col *= smoothstep(2.1, 0.3, length(p * vec2(0.62, 1.0)));
     col *= uIntensity;
-    col += vec3(0.008, 0.009, 0.022);
+    col += vec3(0.016, 0.011, 0.008);
     col += (grain(gl_FragCoord.xy + fract(uTime)) - 0.5) * 0.035;
     gl_FragColor = vec4(col, 1.0);
   }
@@ -78,23 +78,23 @@ export const auroraFragment = /* glsl */ `
     vec2 r = vec2(fbm(p * 2.0 + q * 1.7 + vec2(1.7, 9.2) + t * 1.4), fbm(p * 2.0 + q * 1.7 + vec2(8.3, 2.8) - t));
     float f = fbm(p * 1.3 + r * 1.6);
 
-    vec3 deep = vec3(0.006, 0.008, 0.02);
-    vec3 blue = vec3(0.1, 0.32, 1.0);
-    vec3 violet = vec3(0.42, 0.2, 0.95);
-    vec3 col = mix(deep, blue * 0.5, smoothstep(0.42, 0.95, f) * 0.75);
-    col = mix(col, violet * 0.55, smoothstep(0.58, 1.0, r.x) * 0.5);
+    vec3 deep = vec3(0.012, 0.008, 0.006);
+    vec3 orange = vec3(1.0, 0.36, 0.08);
+    vec3 ember = vec3(0.62, 0.12, 0.03);
+    vec3 col = mix(deep, orange * 0.32, smoothstep(0.42, 0.95, f) * 0.75);
+    col = mix(col, ember * 0.6, smoothstep(0.58, 1.0, r.x) * 0.5);
 
     float ribbon = sin((p.y + f * 0.8 + p.x * 0.3) * 10.0 - uTime * 0.35);
-    col += blue * pow(max(ribbon, 0.0), 14.0) * 0.28 * smoothstep(0.35, 0.9, f);
+    col += orange * pow(max(ribbon, 0.0), 14.0) * 0.22 * smoothstep(0.35, 0.9, f);
 
     // Planet horizon rising from the bottom edge.
     float curve = p.y + 0.62 - 0.32 * p.x * p.x / max(aspect * 0.5, 0.6);
     float rim = exp(-abs(curve) * 26.0);
     float halo = exp(-max(curve, 0.0) * 5.0) * step(0.0, curve);
-    col += vec3(0.25, 0.55, 1.0) * rim * 0.9 + blue * halo * 0.35;
+    col += vec3(1.0, 0.6, 0.3) * rim * 0.9 + orange * halo * 0.3;
     col *= mix(1.0, 0.18, step(curve, 0.0) * smoothstep(0.0, -0.08, curve));
 
-    col += vec3(0.3, 0.5, 1.0) * 0.16 * exp(-length(p - m) * 3.2);
+    col += vec3(1.0, 0.45, 0.15) * 0.14 * exp(-length(p - m) * 3.2);
     col *= smoothstep(1.25, 0.25, length(p * vec2(0.55, 1.0)));
     col *= uFade;
     col += (grain(gl_FragCoord.xy + fract(uTime)) - 0.5) * 0.04;
@@ -142,7 +142,7 @@ export const cardFragment = /* glsl */ `
     float shade = gl_FrontFacing ? mix(0.5, 1.0, smoothstep(0.05, 0.7, vFacing)) : 0.26;
     col *= shade * uDim;
     float edge = 1.0 - smoothstep(0.0, 0.025, -d);
-    col += vec3(0.45, 0.65, 1.0) * edge * 0.35 * uDim;
+    col += vec3(1.0, 0.6, 0.3) * edge * 0.3 * uDim;
     gl_FragColor = vec4(col, mask * uOpacity);
   }
 `;

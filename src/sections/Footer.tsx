@@ -8,7 +8,7 @@ export default function Footer({ inert }: { inert: boolean }) {
   return <footer className="footer" inert={inert}>
     <div className="container footer-top">
       <div className="footer-brand">
-        <Brand/>
+        <Brand full/>
         <p>Websites, social media, content and Google presence. One team, built to help your business be found, followed and chosen.</p>
         <Action href="#contact" variant="primary">Start a project</Action>
       </div>
@@ -32,7 +32,7 @@ export default function Footer({ inert }: { inert: boolean }) {
     </div>
     <div className="container footer-bottom">
       <span>© {new Date().getFullYear()} Web Matrix Solutions. All rights reserved.</span>
-      <span>Designed to impress. Built to perform.</span>
+      <span>We build. You grow.</span>
       <a href="#home" className="back-top">Back to top <ArrowUp size={14}/></a>
     </div>
   </footer>;

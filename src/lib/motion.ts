@@ -26,14 +26,21 @@ function smoothScroll(): Cleanup {
   return () => { observer.disconnect(); gsap.ticker.remove(tick); lenis.destroy(); };
 }
 
+/**
+ * The logo is wiped in behind an orange light sweep, the tagline rises, then the black
+ * screen breaks into tiles that flash orange and collapse from the centre outward.
+ */
 function preloader(): void {
-  const counter = document.querySelector('.preloader-count');
-  const state = { value: 0 };
-  gsap.timeline({ onComplete: () => document.documentElement.classList.add('is-loaded') })
-    .to(state, { value: 100, duration: 1.3, ease: 'power2.inOut', onUpdate: () => { if (counter) counter.textContent = String(Math.round(state.value)).padStart(3, '0'); } })
-    .to('.preloader-bar span', { scaleX: 1, duration: 1.3, ease: 'power2.inOut' }, 0)
-    .to('.preloader-inner', { yPercent: -40, opacity: 0, duration: 0.5, ease: 'power2.in' })
-    .to('.preloader', { clipPath: 'inset(0 0 100% 0)', duration: 0.9, ease: 'expo.inOut', onStart: markReady }, '-=0.15');
+  const tiles = all<HTMLElement>('.preloader-tiles i');
+  const wave = { grid: 'auto' as const, from: 'center' as const, amount: 0.55 };
+  gsap.timeline({ delay: 0.15, onComplete: () => document.documentElement.classList.add('is-loaded') })
+    .to('.preloader-mark', { clipPath: 'inset(0 0% 0 0)', duration: 0.95, ease: 'power4.inOut' })
+    .fromTo('.preloader-sweep', { left: '0%' }, { left: '100%', duration: 0.95, ease: 'power4.inOut' }, '<')
+    .to('.preloader-sweep', { opacity: 0, duration: 0.3 })
+    .to('.preloader-tagline > span > span', { y: 0, duration: 0.7, stagger: 0.12, ease: 'expo.out' }, '-=0.35')
+    .to('.preloader-brand', { scale: 0.94, opacity: 0, filter: 'blur(6px)', duration: 0.45, ease: 'power2.in' }, '+=0.35')
+    .to(tiles, { backgroundColor: '#ff5b14', duration: 0.18, stagger: wave, ease: 'none', onStart: markReady }, '-=0.1')
+    .to(tiles, { scale: 0, rotate: 45, borderRadius: '30%', duration: 0.5, stagger: wave, ease: 'power3.in' }, '<0.12');
 }
 
 function splitReveals(): void {

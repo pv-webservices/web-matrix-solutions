@@ -15,13 +15,17 @@ import Faq from './sections/Faq';
 import Cta from './sections/Cta';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
+import { LOGO_MARK } from './components/ui';
 
+const PRELOADER_TILES = 60;
+
+/** Logo wipe, tagline, then a wave of tiles that flash orange and collapse (lib/motion). */
 function Preloader() {
   return <div className="preloader" aria-hidden="true">
-    <div className="preloader-inner">
-      <span className="preloader-brand">web<b>matrix</b></span>
-      <span className="preloader-count">000</span>
-      <span className="preloader-bar"><span/></span>
+    <div className="preloader-tiles">{Array.from({ length: PRELOADER_TILES }, (_, index) => <i key={index}/>)}</div>
+    <div className="preloader-brand">
+      <div className="preloader-mark"><img src={LOGO_MARK} alt="" width="480" height="163"/><span className="preloader-sweep"/></div>
+      <p className="preloader-tagline"><span><span>We build.</span></span> <span><span>You <em>grow.</em></span></span></p>
     </div>
   </div>;
 }

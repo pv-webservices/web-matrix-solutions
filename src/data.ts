@@ -24,12 +24,12 @@ export const sites = [
 
 export const services = [
   {
-    name: 'Website Development & Management', short: 'Websites', icon: Globe2, image: gen('service-web'),
+    name: 'Website Development & Management', short: 'Websites', icon: Globe2, image: gen('service-web-orange'),
     description: 'Fast, beautiful websites designed to turn visitors into enquiries, then kept secure, updated and improving every month.',
     features: ['Custom design and development', 'Mobile-first and lightning fast', 'SEO-ready structure', 'Hosting, updates and ongoing care'],
   },
   {
-    name: 'Social Media Management', short: 'Social', icon: MessagesSquare, image: gen('social-feed'),
+    name: 'Social Media Management', short: 'Social', icon: MessagesSquare, image: gen('social-feed-orange'),
     description: 'A consistent, recognisable presence across your channels, planned, published and nurtured so your audience keeps coming back.',
     features: ['Channel strategy and content calendar', 'Posting and scheduling', 'Community and inbox care', 'Monthly performance reports'],
   },
@@ -50,8 +50,8 @@ export const marquee = ['Website Development', 'Website Management', 'Social Med
 export const statement = 'We help ambitious businesses look sharper, show up everywhere and turn attention into enquiries, with one team handling your website, socials, content and Google presence.';
 
 export const approach = [
-  { title: 'Discovery First', icon: Compass, text: 'We start by understanding your goals, your customers and your voice, so everything we make has a clear job to do.', image: asset('process-sphere') },
-  { title: 'Mobile-First Design', icon: Smartphone, text: 'Most of your customers meet you on a phone. Every page, post and profile is designed for that screen first.', image: asset('work-mobile') },
+  { title: 'Discovery First', icon: Compass, text: 'We start by understanding your goals, your customers and your voice, so everything we make has a clear job to do.', image: asset('approach-orb') },
+  { title: 'Mobile-First Design', icon: Smartphone, text: 'Most of your customers meet you on a phone. Every page, post and profile is designed for that screen first.', image: asset('work-mobile-orange') },
   { title: 'Conversion-Driven', icon: MousePointerClick, text: 'Beautiful is the baseline. We shape journeys that make the next step obvious: call, visit, book or buy.', image: null },
   { title: 'Consistent Growth', icon: TrendingUp, text: 'We review what is working every month and keep refining, so your presence gets stronger over time.', image: null },
 ] as const;

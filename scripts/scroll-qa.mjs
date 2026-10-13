@@ -9,7 +9,7 @@ const height = Number(process.argv[3] ?? 900);
 const mobile = width < 768;
 await fs.mkdir('qa/scroll', { recursive: true });
 
-const browser = await chromium.launch({ headless: true, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
+const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width, height }, reducedMotion: 'no-preference', hasTouch: mobile, isMobile: mobile });
 const errors = [];
 page.on('pageerror', error => errors.push(error.message));

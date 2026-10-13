@@ -21,7 +21,7 @@ export default function Method() {
       <div className="container method-stage">
         {steps.map((step, index) => <div className="method-slide" key={step.word} style={{ '--i': index } as CSSProperties}>
           <span className="method-num" aria-hidden="true">0{index + 1}</span>
-          <h3><span>{step.word}</span></h3>
+          <h3><span>{step.word}<i aria-hidden="true">.</i></span></h3>
           <p>{step.text}</p>
         </div>)}
       </div>

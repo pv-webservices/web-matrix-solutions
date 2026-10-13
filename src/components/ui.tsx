@@ -1,10 +1,12 @@
 import type { ReactNode } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 
-export function Brand() {
-  return <a className="brand" href="#home" aria-label="Web Matrix Solutions home">
-    <span className="brand-symbol" aria-hidden="true"><i/><i/><i/><i/></span>
-    <span className="brand-word">web<b>matrix</b><small>SOLUTIONS</small></span>
+export const LOGO_MARK = '/brand/wms-mark.png';
+export const LOGO_FULL = '/brand/wms-logo.png';
+
+export function Brand({ full = false }: { full?: boolean }) {
+  return <a className={`brand ${full ? 'brand-full' : ''}`} href="#home" aria-label="Web Matrix Solutions home">
+    <img src={full ? LOGO_FULL : LOGO_MARK} alt="WMS, Web Matrix Solutions" width={full ? 640 : 480} height={full ? 297 : 163}/>
   </a>;
 }
 

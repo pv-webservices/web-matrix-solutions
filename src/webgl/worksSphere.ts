@@ -80,7 +80,7 @@ function titleTexture(text: string): CanvasTexture {
 export function createWorksSphere({ canvas, images, titles }: WorksSphereOptions): WorksSphere {
   const renderer = new WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
   renderer.outputColorSpace = LinearSRGBColorSpace;
-  renderer.setClearColor(0x030308, 1);
+  renderer.setClearColor(0x050505, 1);
 
   const scene = new Scene();
   const camera = new PerspectiveCamera(FOV, 1, 0.1, 100);
