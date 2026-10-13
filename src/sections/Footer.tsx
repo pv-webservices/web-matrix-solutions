@@ -1,34 +1,34 @@
 import { ArrowUp, Mail, Phone } from 'lucide-react';
 import { EMAIL, navigation, PHONE, PHONE_LABEL, services } from '../data';
-import { Action, Brand } from './ui';
+import { Action, Brand } from '../components/ui';
 
-interface FooterProps {
-  inert: boolean;
-  onService: (index: number) => void;
-}
+const WORDMARK = 'webmatrix';
 
-export default function Footer({ inert, onService }: FooterProps) {
+export default function Footer({ inert }: { inert: boolean }) {
   return <footer className="footer" inert={inert}>
     <div className="container footer-top">
       <div className="footer-brand">
         <Brand/>
-        <p>Strategy, design and technology. All in one place, built to move businesses forward.</p>
+        <p>Websites, social media, content and Google presence. One team, built to help your business be found, followed and chosen.</p>
         <Action href="#contact" variant="primary">Start a project</Action>
       </div>
       <div className="footer-column">
-        <h3>Quick links</h3>
+        <h3>Explore</h3>
         {navigation.map(([label, href]) => <a key={label} href={href}>{label}</a>)}
-        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
       </div>
       <div className="footer-column">
         <h3>Services</h3>
-        {services.map((service, index) => <button key={service.name} onClick={() => onService(index)}>{service.name}</button>)}
+        {services.map(service => <a key={service.name} href="#services">{service.name}</a>)}
       </div>
       <div className="footer-column">
-        <h3>Let's connect</h3>
+        <h3>Say hello</h3>
         <a className="footer-contact" href={`mailto:${EMAIL}`}><Mail size={15}/>{EMAIL}</a>
         <a className="footer-contact" href={`tel:${PHONE}`}><Phone size={15}/>{PHONE_LABEL}</a>
       </div>
+    </div>
+    <div className="footer-wordmark" aria-hidden="true">
+      {WORDMARK.split('').map((letter, index) => <span key={index}>{letter}</span>)}
     </div>
     <div className="container footer-bottom">
       <span>© {new Date().getFullYear()} Web Matrix Solutions. All rights reserved.</span>

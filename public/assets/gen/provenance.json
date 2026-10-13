@@ -1,0 +1,78 @@
+{
+  "model": "gpt-image-2",
+  "quality": "medium",
+  "images": [
+    {
+      "name": "site-cafe",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Specialty coffee roastery called \"Brew Theory\". Warm cream and espresso brown palette, large hero photo of latte art in a ceramic cup, headline \"Slow coffee, bold mornings\". Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-realty",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Luxury real estate developer called \"Aurelia Homes\". Dark charcoal with gold accents, hero photo of a modern villa with an infinity pool at dusk, headline \"Live above the ordinary\". Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-fitness",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Boutique fitness studio called \"Pulse Lab\". Black background with electric lime accents, hero photo of an athlete mid sprint with dramatic lighting, huge condensed headline \"Train like you mean it\". Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-skincare",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Clean skincare brand called \"Dewly\". Soft blush pink and white palette, hero product photo of glass serum bottles on stone with water droplets, elegant serif headline \"Skin, but softer\". Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-dental",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Modern dental clinic called \"Smile Studio\". Calm teal and white palette, hero photo of a smiling woman in a bright clinic, headline \"Gentle care, brighter smiles\", booking button. Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-travel",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Travel agency called \"Wanderlore\". Hero photo of turquoise lagoon with a wooden boat between limestone cliffs, bold white headline \"Go further than the map\", search bar for destinations. Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-fashion",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Fashion label called \"NOIR ATELIER\". Editorial black and white layout, model in a tailored oversized coat, giant serif wordmark, headline \"The Autumn Edit\". Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-restaurant",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Modern Indian fine dining restaurant called \"Saffron & Smoke\". Deep burgundy and saffron palette, hero photo of plated food with dramatic dark lighting, headline \"A table worth travelling for\", reserve button. Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-architecture",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Architecture studio called \"Formline\". Minimal light grey layout, big photo of a brutalist concrete house in a forest, thin sans headline \"Spaces with intent\", project grid below. Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-jewellery",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Handcrafted jewellery brand called \"Kaanch\". Deep emerald green with gold, close-up photo of a gold necklace on velvet, elegant serif headline \"Heirlooms, made today\". Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-education",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Online coaching academy called \"Brightpath\". Friendly indigo and sunny yellow palette, photo of a smiling student with a laptop, headline \"Learn skills that open doors\", stats row \"12k learners\". Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-organic",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Organic farm-to-home grocery brand called \"Greenroot\". Fresh green and off-white palette, hero photo of a basket of vegetables in sunlight, headline \"Picked this morning, at your door\". Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-yoga",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Yoga retreat called \"Stillwater\". Sand beige palette, hero photo of a woman in a yoga pose on a beach at sunrise, delicate serif headline \"Breathe in. Begin again\". Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-auto",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Premium car rental service called \"DriveLux\". Dark cinematic layout, hero photo of a silver sports car on a coastal road at sunset, headline \"Rent the drive you deserve\", booking widget. Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-interiors",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. Interior design studio called \"Casa Linea\". Warm terracotta and cream, hero photo of a sunlit living room with arched windows and linen sofa, headline \"Rooms that feel like you\". Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "site-tech",
+      "prompt": "A flat, front-on screenshot of a premium, award-winning website homepage, filling the entire frame edge to edge. No browser window, no device, no mockup, no perspective. SaaS analytics startup called \"Northstar\". Dark navy with glowing blue gradients, product dashboard screenshot with charts in the hero, headline \"See every number that matters\". Crisp modern typography, generous spacing, a clean navigation bar at the top with a logo and 4 menu links, one clear call-to-action button. Realistic UI design as seen on Awwwards, sharp legible text."
+    },
+    {
+      "name": "social-feed",
+      "prompt": "A photorealistic smartphone floating at a slight angle against a deep black background with soft electric blue rim light, its screen showing a beautiful, cohesive social media profile grid of nine colourful lifestyle posts for a fictional cafe brand, with like hearts and comment bubbles floating around the phone as glossy 3D icons. Premium product render, cinematic."
+    },
+    {
+      "name": "service-web",
+      "prompt": "A cinematic, photorealistic render of a sleek laptop and a smartphone on a dark reflective surface, both screens showing a vibrant modern website with bold typography and imagery. Deep black studio background with electric blue and violet light streaks reflecting on the glass. Premium, high-end tech advertising look."
+    }
+  ]
+}
