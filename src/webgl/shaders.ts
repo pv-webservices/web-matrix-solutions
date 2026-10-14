@@ -87,12 +87,16 @@ export const auroraFragment = /* glsl */ `
     float ribbon = sin((p.y + f * 0.8 + p.x * 0.3) * 10.0 - uTime * 0.35);
     col += orange * pow(max(ribbon, 0.0), 14.0) * 0.22 * smoothstep(0.35, 0.9, f);
 
-    // Planet horizon rising from the bottom edge.
-    float curve = p.y + 0.62 - 0.32 * p.x * p.x / max(aspect * 0.5, 0.6);
+    // Planet rising from the bottom: a circle sized to the screen width whose top sits
+    // just above the bottom edge, so the whole arc shows on wide and narrow screens.
+    float radius = clamp(aspect * 0.72, 0.4, 1.3);
+    vec2 centre = vec2(0.0, -0.385 - radius);
+    float curve = length(p - centre) - radius;
     float rim = exp(-abs(curve) * 26.0);
     float halo = exp(-max(curve, 0.0) * 5.0) * step(0.0, curve);
     col += vec3(1.0, 0.6, 0.3) * rim * 0.9 + orange * halo * 0.3;
     col *= mix(1.0, 0.18, step(curve, 0.0) * smoothstep(0.0, -0.08, curve));
+    col += orange * 0.22 * exp(curve * 9.0) * step(curve, 0.0);
 
     col += vec3(1.0, 0.45, 0.15) * 0.14 * exp(-length(p - m) * 3.2);
     col *= smoothstep(1.25, 0.25, length(p * vec2(0.55, 1.0)));

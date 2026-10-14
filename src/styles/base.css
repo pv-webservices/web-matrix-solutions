@@ -104,5 +104,5 @@ h1 em, h2 em, h3 em { font-family: var(--serif); font-style: italic; font-weight
 
 @media (prefers-reduced-motion: reduce) {
   .preloader { display: none; }
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; animation-delay: 0s !important; }
 }
