@@ -6,6 +6,7 @@ import Lenis from 'lenis';
 gsap.registerPlugin(ScrollTrigger);
 
 const MOTION_OK = '(prefers-reduced-motion: no-preference)';
+const MOTION_REDUCED = '(prefers-reduced-motion: reduce)';
 const DESKTOP = '(min-width: 900px)';
 const READY_FALLBACK_MS = 4000;
 
@@ -166,7 +167,8 @@ export function useSiteMotion(): void {
   useEffect(() => {
     const fallback = window.setTimeout(() => { markReady(); document.documentElement.classList.add('is-loaded'); }, READY_FALLBACK_MS);
     const mm = gsap.matchMedia();
-    mm.add({ motion: MOTION_OK, desktop: DESKTOP }, context => {
+    // `calm` guarantees one condition always matches, so setup runs on every screen.
+    mm.add({ motion: MOTION_OK, calm: MOTION_REDUCED, desktop: DESKTOP }, context => {
       const { motion, desktop } = context.conditions as { motion: boolean; desktop: boolean };
       if (!motion) {
         markReady();
