@@ -1,5 +1,5 @@
-import { ArrowUp, Mail, Phone } from 'lucide-react';
-import { EMAIL, navigation, PHONE, PHONE_LABEL, services } from '../data';
+import { ArrowUp, Mail } from 'lucide-react';
+import { EMAIL, navigation, services } from '../data';
 import { Action, Brand } from '../components/ui';
 
 const WORDMARK = 'webmatrix';
@@ -24,7 +24,6 @@ export default function Footer({ inert }: { inert: boolean }) {
       <div className="footer-column">
         <h3>Say hello</h3>
         <a className="footer-contact" href={`mailto:${EMAIL}`}><Mail size={15}/>{EMAIL}</a>
-        <a className="footer-contact" href={`tel:${PHONE}`}><Phone size={15}/>{PHONE_LABEL}</a>
       </div>
     </div>
     <div className="footer-wordmark" aria-hidden="true">

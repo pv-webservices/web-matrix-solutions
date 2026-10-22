@@ -50,4 +50,4 @@ The works globe and showcase are labelled as concept designs, not client project
 
 ## Contact behaviour
 
-The contact form opens the visitor's email app with a message to `info@webmatrixsolutions.com` ready to send. Nothing is sent until the visitor presses Send there. Direct email and phone links are also available.
+The contact form opens the visitor's email app with a message to `info@webmatrixsolutions.com` ready to send. Nothing is sent until the visitor presses Send there. A direct email link is also available.

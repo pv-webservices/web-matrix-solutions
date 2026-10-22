@@ -46,7 +46,7 @@ test('FAQ opens one answer at a time', async ({ page }) => {
   await expect(page.getByText('You can start with one service')).toBeVisible();
 });
 
-test('contact form prepares an email and direct contact links work', async ({ page }) => {
+test('contact form prepares an email and the email link works', async ({ page }) => {
   await page.goto('/');
   const form = page.locator('.contact-form');
   await form.getByLabel('Your name').fill('Example Person');
@@ -57,7 +57,6 @@ test('contact form prepares an email and direct contact links work', async ({ pa
   await expect(form.getByRole('status')).toContainText('Your email app should now be open');
   await expect(form.getByRole('link', { name: 'Open the prepared email again' })).toHaveAttribute('href', /mailto:info@webmatrixsolutions\.com\?subject=Project%20enquiry%3A%20Google%20My%20Business%20Management/);
   await expect(page.getByRole('link', { name: /info@webmatrixsolutions\.com/ }).first()).toHaveAttribute('href', 'mailto:info@webmatrixsolutions.com');
-  await expect(page.getByRole('link', { name: /\+91 89208 47457/ }).first()).toHaveAttribute('href', 'tel:+918920847457');
 });
 
 test('mobile menu links and escape work', async ({ page }) => {
