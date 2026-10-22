@@ -5,8 +5,6 @@ import {
 } from 'lucide-react';
 
 export const EMAIL = 'info@webmatrixsolutions.com';
-export const PHONE = '+918920847457';
-export const PHONE_LABEL = '+91 89208 47457';
 
 export const navigation = [
   ['Services', '#services'], ['Work', '#work'], ['Approach', '#approach'], ['Process', '#process'], ['FAQ', '#faq'],
@@ -72,7 +70,7 @@ export const promises = [
 ] as const;
 
 export const faq = [
-  ['How do I get started with Web Matrix Solutions?', 'Send us a message or call. We will set up a short conversation about your goals, look at your current website and channels, and recommend a clear plan.'],
+  ['How do I get started with Web Matrix Solutions?', 'Send us a message. We will set up a short conversation about your goals, look at your current website and channels, and recommend a clear plan.'],
   ['Can you manage just one service, like social media?', 'Yes. You can start with one service, such as Google My Business or social media, and add more whenever it makes sense for you.'],
   ['Do you create the content, or do we need to supply it?', 'We can do both. Our team plans and produces photos, reels, graphics and copy, and we are happy to work with material you already have.'],
   ['Will my website work well on phones?', 'Every website we build is designed mobile-first, tested across screen sizes and tuned for speed.'],

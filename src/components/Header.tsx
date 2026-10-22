@@ -1,6 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react';
-import { ArrowUpRight, Menu, Phone, X } from 'lucide-react';
-import { navigation, PHONE, PHONE_LABEL } from '../data';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { navigation } from '../data';
 import { Action, Brand } from './ui';
 
 const SCROLLED_OFFSET = 24;
@@ -52,7 +52,6 @@ export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
       {[...navigation, ['Contact', '#contact'] as const].map(([label, href], index) => <a key={label} href={href} onClick={close} style={{ '--i': index } as CSSProperties}>
         <span><small>0{index + 1}</small>{label}</span><ArrowUpRight/>
       </a>)}
-      <a className="mobile-call" href={`tel:${PHONE}`} onClick={close} style={{ '--i': navigation.length + 1 } as CSSProperties}><span><small>Call</small>{PHONE_LABEL}</span><Phone/></a>
     </nav>}
   </>;
 }

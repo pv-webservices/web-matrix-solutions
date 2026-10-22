@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
-import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
-import { EMAIL, PHONE, PHONE_LABEL, services } from '../data';
+import { ArrowUpRight, Mail, MapPin } from 'lucide-react';
+import { EMAIL, services } from '../data';
 import { Eyebrow, Lines } from '../components/ui';
 
 function field(fields: FormData, name: string): string {
@@ -51,7 +51,6 @@ export default function Contact() {
         <p className="reveal">Tell us about your business and where you want to grow. We will reply with honest advice and a clear next step.</p>
         <div className="contact-methods reveal">
           <a className="contact-method" href={`mailto:${EMAIL}`}><span className="contact-method-icon"><Mail size={18}/></span><span><small>Email us</small>{EMAIL}</span><ArrowUpRight size={17}/></a>
-          <a className="contact-method" href={`tel:${PHONE}`}><span className="contact-method-icon"><Phone size={18}/></span><span><small>Call us</small>{PHONE_LABEL}</span><ArrowUpRight size={17}/></a>
           <div className="contact-method"><span className="contact-method-icon"><MapPin size={18}/></span><span><small>Working with</small>Businesses across India and beyond</span></div>
         </div>
       </div>
